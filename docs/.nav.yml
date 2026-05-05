@@ -1,0 +1,14 @@
+nav:
+- Home: index.md
+- Lab:
+  - Overview: overview.md
+  - Introduction: introduction.md
+  - Lab 1 - Design Configuration: lab1_design_configuration.md
+  - Lab 2 - Fabric Deployment: lab2_fabric_deployment.md
+  - Lab 3 - ISE Configuration: lab3_ise_config.md
+  - Lab 4 - CI/CD Integration: lab4_cicd.md
+  - Lab 5 - Validations: lab5_validations.md
+  - Lab 6 (Optional) - MultiProject CICD Pipeline: lab6_multiproject_pipeline.md
+  - Conclusion: conclusion.md
+- Topologies: topologies.md
+- Network as Code: https://netascode.cisco.com/
