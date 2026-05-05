@@ -1,7 +1,7 @@
 ---
 site_name: "LTRENS-3751: SD-Access as Code with Cisco Catalyst Center and ISE Automation"
 #site_description: {site_name} # This parameter will be auto-set to site_name, unless explicitly defined. Used for HTML meta tags
-site_author: "Kuba Mazurkiewicz, Marcin Hamroz"
+site_author: "Dhrumil Prajapati, Navin Suvarna"
 copyright: Copyright &copy; {year} Cisco # This parameter will auto-update the year in HTML pages based on the build date
 theme:
   name: material
