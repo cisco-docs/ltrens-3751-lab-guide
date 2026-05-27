@@ -154,7 +154,7 @@ Go to `Work Centers` > `TrustSec` > `TrustSec Policy` > `Egress Policy` > `Matri
   ![](./assets/nac-ise-simple-example-fig4.png){ width="600" }
 </figure>
 
-Before expanding on additional use-cases it is worth understanding how you can add and remove resources. This will be covered in [step 2](./#step-2-adding-additional-resources) and [step 3](./#step-3-removing-resources).
+Before expanding on additional use-cases it is worth understanding how you can add and remove resources. This will be covered in [step 2](#step-2-adding-additional-resources) and [step 3](#step-3-removing-resources).
 
 ## Step 2: Adding additional resources
 
@@ -226,7 +226,7 @@ Go to `Work Centers` > `TrustSec` > `TrustSec Policy` > `Egress Policy` > `Matri
 
 ## Step 3: Removing resources
 
-In this step you will remove matrix entry `CorpMobiles-CorpGuests`, which was created in [step 2](./#step-2-adding-additional-resources).
+In this step you will remove matrix entry `CorpMobiles-CorpGuests`, which was created in [step 2](#step-2-adding-additional-resources).
 
 Remove following section from `trustsec.nac.yaml`
 

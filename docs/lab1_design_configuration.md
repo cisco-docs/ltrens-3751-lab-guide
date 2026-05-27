@@ -410,7 +410,7 @@ Go to `Design` > `Network Settings` > `IP Address Pools`
   ![](./assets/nac-cc-simple-example-fig3.png){ width="700" }
 </figure>
 
-Before expanding on additional use-cases it is worth understanding how you can add and remove resources. This will be covered in [step 4](./#step-4-adding-additional-resources) and [step 5](./#step-5-removing-resources).
+Before expanding on additional use-cases it is worth understanding how you can add and remove resources. This will be covered in [step 4](#step-4-adding-additional-resources) and [step 5](#step-5-removing-resources).
 
 ## Step 4: Adding additional resources
 
@@ -537,7 +537,7 @@ Navigate to Catalyst Center (`Design` > `Network Hierarchy`) and verify that the
 
 ## Step 5: Removing resources
 
-In this step you will remove floor `FLOOR_2` from `Art Deco Mansion`, which was created in [step 4](./#step-4-adding-additional-resources).
+In this step you will remove floor `FLOOR_2` from `Art Deco Mansion`, which was created in [step 4](#step-4-adding-additional-resources).
 
 Remove the floor `FLOOR_2` section from `sites.nac.yaml`
 

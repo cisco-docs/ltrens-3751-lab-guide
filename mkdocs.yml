@@ -1,92 +1,146 @@
----
-site_name: "LTRENS-3751: SD-Access as Code with Cisco Catalyst Center and ISE Automation"
-#site_description: {site_name} # This parameter will be auto-set to site_name, unless explicitly defined. Used for HTML meta tags
+site_name: "LTRENS-3751 — SD-Access as Code with Cisco Catalyst Center and ISE Automation"
+site_description: "Automating SD-Access Fabric Deployment using Cisco Catalyst Center, ISE, and Terraform"
 site_author: "Dhrumil Prajapati, Navin Suvarna"
-copyright: Copyright &copy; {year} Cisco # This parameter will auto-update the year in HTML pages based on the build date
+site_url: "https://cisco-docs.github.io/ltrens-3751-lab-guide/"
+repo_url: "https://github.com/cisco-docs/ltrens-3751-lab-guide"
+repo_name: "cisco-docs/ltrens-3751-lab-guide"
+edit_uri: ""
+
+docs_dir: docs
+site_dir: site
+
 theme:
   name: material
-  features:
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.indexes
-    - navigation.instant
-    - navigation.top
-    - navigation.footer
-    - search.suggest
-    - content.code.copy
-    - toc.integrate
-  custom_dir: docs/overrides
+  logo: template_assets/cisco_logo.png
+  favicon: template_assets/cisco_logo.png
+  language: en
+
   palette:
-    # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    - scheme: default
       primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
+    - scheme: slate
       primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-  logo: template_assets/cisco_logo.png
-  favicon: template_assets/cisco_logo.png
-extra:
-  generator: false
-  footer_revision_datetime: true # Change to true to add to the footer the datetime for last update.
+
+  font:
+    text: Inter
+    code: Source Code Pro
+
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - toc.follow
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
 extra_css:
-  - stylesheets/extra.css
+  - stylesheets/cisco.css
+
 plugins:
-  - search
-  - awesome-nav
-  - to-pdf:
-      cover_subtitle: "Instructor-Led Labs"
-      cover_logo: template_assets/PDF_Event_General_Logo.png
-      ordered_chapter_level: 1
-      copyright: Copyright &copy; Cisco 
-      enabled: true  # Set to true or comment this line with # to enable lab guide export to PDF file
+  - search:
+      lang: en
+  - awesome-pages
   - glightbox:
       touchNavigation: true
       loop: false
-      effect: fade
+      effect: zoom
       slide_effect: slide
       width: 100%
       height: auto
       zoomable: true
-      draggable: false
-      skip_classes:
-      - custom-skip-class-name
-      auto_caption: true
-      caption_position: top
-  # - macros:
-  #     include_yaml: 
-  #       - data/vars_global.yaml
-  #       - data/vars_pods.yaml
-  #     on_error_fail: !ENV [MACRO_ERROR_FAIL, true]  # Set to false or comment this line with # to ignore macro errors and continue the build
-  #     on_undefined: strict
-  #     verbose: false
+      draggable: true
+  - print-site:
+      add_to_navigation: true
+      print_page_title: "Print / Export"
+      add_full_urls: false
+      enumerate_headings: false
+      enumerate_figures: false
+      add_table_of_contents: true
+      toc_title: "Table of Contents"
+      toc_depth: 3
+      path_to_pdf: ""
 
 markdown_extensions:
-  - md_in_html
+  # Python Markdown
   - abbr
   - admonition
   - attr_list
   - def_list
   - footnotes
-  - meta
+  - md_in_html
   - tables
+  - toc:
+      permalink: true
+      title: On this page
+
+  # PyMdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
   - pymdownx.details
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-hooks:
-  - hooks/config.py
-dev_addr: "0.0.0.0:8000"
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Overview: overview.md
+    - Introduction: introduction.md
+    - Topologies: topologies.md
+    - Network as Code: nac.md
+  - Labs:
+    - Lab 1 — Design Configuration: lab1_design_configuration.md
+    - Lab 2 — Fabric Deployment: lab2_fabric_deployment.md
+    - Lab 3 — ISE Configuration: lab3_ise_config.md
+    - Lab 4 — CI/CD Integration: lab4_cicd.md
+    - Lab 5 — Validations: lab5_validations.md
+    - Lab 6 (Optional) — MultiProject CI/CD Pipeline: lab6_multiproject_pipeline.md
+  - Conclusion: conclusion.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/cisco-docs
+      name: Cisco Docs on GitHub
+  generator: false
+
+copyright: >
+  Copyright &copy; 2025 Cisco Systems, Inc. — LTRENS-3751 Cisco Live Lab Guide

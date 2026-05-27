@@ -909,7 +909,7 @@ Once you push this change to GitLab, a new pipeline will be triggered for the `N
 To leverage the ISE configuration applied by CICD pipeline we must modify the port assignment by changing authentication template on interfaces connected to `Host01` and `Host02` from `No Authentication` to `Closed Authentication`.
 
 !!! info
-    Make sure you finish ([Lab 2 - Fabric Deployment](./lab2_fabric_deployment.md)) and [step 10 - step 14](./#step-10-create-catalystcenter-repository-on-gitlab) to complete this step and the subsequent ones.
+    Make sure you finish ([Lab 2 - Fabric Deployment](./lab2_fabric_deployment.md)) and [step 10 - step 14](#step-10-create-catalystcenter-repository-on-gitlab) to complete this step and the subsequent ones.
 
 Open folder `nac-catalystcenter-comprehensive-example` in Visual Studio Code and change `authentication_template_name` to `Closed Authentication` on port-assignment section under both edge devices in `devices.nac.yaml`:
 

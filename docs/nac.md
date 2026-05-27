@@ -1,3 +1,3 @@
-## Network as Code ##
+# Network as Code
 
 Manage Networks following Infrastructure as Code principles.
