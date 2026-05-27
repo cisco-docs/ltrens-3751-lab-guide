@@ -1524,6 +1524,17 @@
 <p class="admonition-title">Note</p>
 <p>Note that all GitLab features used in this guide are available in the free tier. For more information about features and pricing see: <a href="https://about.gitlab.com/pricing/">GitLab Pricing</a></p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will be required to generate a new Token for GitLab access as it might have expired, causing the pipeline to fail. Follow the steps below to generate a new token:
+- From Gitlab home, click on <code>Groups</code> -&gt; <code>labuser</code> 
+- On the left pane select <code>Settings</code> -&gt; <code>Access Tokens</code>
+- There should be a token already created with the name <code>GITLAB_TOKEN</code>. Click the Refresh icon to regenerate the new token. Copy the new token as you will only see it once. 
+- Now, on the left pane, select <code>CI/CD</code> -&gt; <code>Variables</code>
+- Locate the variable <code>GITLAB_TOKEN</code> and click the Edit icon to edit the variable.
+- Paste the new token in the <code>Value</code> field and click on <code>Save changes</code></p>
+<p>Now, please continue with the lab and the CI/CD pipeline should now be working as expected. </p>
+</div>
 <p><strong>Import repository</strong></p>
 <p>Next, select <code>Projects</code> -&gt; <code>Create a project</code> -&gt; <code>Import Project</code>.</p>
 <figure>
