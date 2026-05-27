@@ -1528,17 +1528,15 @@
 <p class="admonition-title">Note</p>
 <p>You will be required to generate a new Token for GitLab access as it might have expired, causing the pipeline to fail. Follow the steps below to generate a new token:</p>
 </div>
-<ul>
-<li>From Gitlab home, click on <code>Groups</code> -&gt; <code>labuser</code> </li>
-<li>On the left pane select <code>Settings</code> -&gt; <code>Access Tokens</code></li>
-<li>There should be a token already created with the name <code>GITLAB_TOKEN</code>. Click the Refresh icon to regenerate the new token. Copy the new token as you will only see it once. </li>
-<li>Now, on the left pane, select <code>CI/CD</code> -&gt; <code>Variables</code></li>
-<li>Locate the variable <code>GITLAB_TOKEN</code> and click the Edit icon to edit the variable.</li>
-<li>
-<p>Paste the new token in the <code>Value</code> field and click on <code>Save changes</code></p>
-<p>Now, please continue with the lab and the CI/CD pipeline should now be working as expected. </p>
-</li>
-</ul>
+<p><strong><code>GITLAB_TOKEN</code> Change Procedure</strong>
+  - From Gitlab home, click on <code>Groups</code> -&gt; <code>labuser</code> 
+  - On the left pane select <code>Settings</code> -&gt; <code>Access Tokens</code>
+  - There should be a token already created with the name <code>GITLAB_TOKEN</code>. Click the Refresh icon to regenerate the new token. Copy the new token as you will only see it once. 
+  - Now, on the left pane, select <code>CI/CD</code> -&gt; <code>Variables</code>
+  - Locate the variable <code>GITLAB_TOKEN</code> and click the Edit icon to edit the variable.
+  - Paste the new token in the <code>Value</code> field and click on <code>Save changes</code></p>
+<div class="language-text highlight"><pre><span></span><code>Now, please continue with the lab and the CI/CD pipeline should now be working as expected.
+</code></pre></div>
 <p><strong>Import repository</strong></p>
 <p>Next, select <code>Projects</code> -&gt; <code>Create a project</code> -&gt; <code>Import Project</code>.</p>
 <figure>
