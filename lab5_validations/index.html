@@ -1,0 +1,1741 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Automating SD-Access Fabric Deployment using Cisco Catalyst Center, ISE, and Terraform">
+      
+      
+        <meta name="author" content="Dhrumil Prajapati, Navin Suvarna">
+      
+      
+        <link rel="canonical" href="https://cisco-docs.github.io/ltrens-3751-lab-guide/lab5_validations/">
+      
+      
+        <link rel="prev" href="../lab4_cicd/">
+      
+      
+        <link rel="next" href="../lab6_multiproject_pipeline/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../template_assets/cisco_logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Lab 5 — Validations - LTRENS-3751 — SD-Access as Code with Cisco Catalyst Center and ISE Automation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CSource+Code+Pro:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Source Code Pro"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../stylesheets/cisco.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-5-validations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="LTRENS-3751 — SD-Access as Code with Cisco Catalyst Center and ISE Automation" class="md-header__button md-logo" aria-label="LTRENS-3751 — SD-Access as Code with Cisco Catalyst Center and ISE Automation" data-md-component="logo">
+      
+  <img src="../template_assets/cisco_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LTRENS-3751 — SD-Access as Code with Cisco Catalyst Center and ISE Automation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab 5 — Validations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard="" data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cisco-docs/ltrens-3751-lab-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    cisco-docs/ltrens-3751-lab-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lab1_design_configuration/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../conclusion/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Conclusion
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../print_page/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Print / Export
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="LTRENS-3751 — SD-Access as Code with Cisco Catalyst Center and ISE Automation" class="md-nav__button md-logo" aria-label="LTRENS-3751 — SD-Access as Code with Cisco Catalyst Center and ISE Automation" data-md-component="logo">
+      
+  <img src="../template_assets/cisco_logo.png" alt="logo">
+
+    </a>
+    LTRENS-3751 — SD-Access as Code with Cisco Catalyst Center and ISE Automation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cisco-docs/ltrens-3751-lab-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    cisco-docs/ltrens-3751-lab-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topologies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topologies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network as Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab1_design_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1 — Design Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab2_fabric_deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2 — Fabric Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab3_ise_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3 — ISE Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab4_cicd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 4 — CI/CD Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 5 — Validations
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 5 — Validations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#step-1-linting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Linting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-semantic-and-syntactic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Semantic and Syntactic Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-cicd-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: CI/CD Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-post-deployment-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Post-Deployment Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Post-Deployment Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-test-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding Test Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-installing-and-running-nac-test-linuxmac-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference: Installing and Running nac-test (Linux/Mac Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrating-post-deployment-tests-into-gitlab-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrating Post-Deployment Tests into GitLab CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab6_multiproject_pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 6 (Optional) — MultiProject CI/CD Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conclusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conclusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Print / Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#step-1-linting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Linting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-semantic-and-syntactic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Semantic and Syntactic Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-cicd-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: CI/CD Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-post-deployment-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Post-Deployment Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Post-Deployment Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-test-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding Test Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-installing-and-running-nac-test-linuxmac-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference: Installing and Running nac-test (Linux/Mac Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrating-post-deployment-tests-into-gitlab-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrating Post-Deployment Tests into GitLab CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lab-5-validations">Lab 5 - Validations<a class="headerlink" href="#lab-5-validations" title="Permanent link">¶</a></h1>
+<p>This section explores several areas that can be used to improve the quality of programmatic changes. These areas are well-established concepts in the software development world, and apply to Infrastructure as Code in a similar fashion. It is worth noting that many of these areas are addressed in commercial offers from Cisco. That being said, a plethora of open-source tools are available to help users develop their own validations. This lab will explore these options.</p>
+<h2 id="step-1-linting">Step 1: Linting<a class="headerlink" href="#step-1-linting" title="Permanent link">¶</a></h2>
+<p>To improve the quality of your code it is recommended to verify that the meaning of user input is both valid and meaningful. This means ensuring that all user input is relevant, accurate, and appropriate for the intended purpose.</p>
+<p>Linting is the process of analyzing code for programmatic and stylistic errors. It helps to identify potential issues such as syntax errors, missing semicolons, excessive whitespace, and formatting inconsistencies. Linting can help make sure that code follows a standard style and complies with best practices, making it easier to read and debug. By automating certain parts of the process, linting can help developers save time and write better quality code.</p>
+<p>There are many ways to lint code, from online tools such as <a href="https://yamllint.com">yamllint.com</a> that lets users copy &amp; paste code, or the more commonly used CLI-driven tools. A common linter for <code>yaml</code> is the <code>yamllint</code> Python package, which can be installed through:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip install yamllint
+</span></code></pre></div>
+<p><code>yamllint</code> is also packaged for all major operating systems, see installation examples (dnf, apt-get...) in the <a href="https://yamllint.readthedocs.io/en/stable/quickstart.html">documentation</a>.</p>
+<p>Running <code>yamllint .</code> within a directory will lint all <code>*.yaml</code> files and show any errors.</p>
+<p>Here is an example:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>yamllint .                                                         %
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>.\data\ip_pools.nac.yaml
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  1:4       error    wrong new line character: expected \n  (new-lines)
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>.\data\sites.nac.yaml
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  1:4       error    wrong new line character: expected \n  (new-lines)
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  74:81     error    no new line character at the end of file  (new-line-at-end-of-file)
+</span></code></pre></div>
+<p>Note that if you run this from a directory that has the NAC terraform modules downloaded (for example after a <code>terraform init</code>), <code>yamllint</code> will lint all files, recursively. This means it will also lint any <code>yaml</code> files in the <code>.terraform</code> directory. You can exclude files by creating a new configuration file <code>.yamllint</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PS C:\Users\admin\Desktop\nac-catalystcenter-comprehensive-example&gt; ni .yamllint
+</span></code></pre></div>
+<p>with following content:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nn">---</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">extends</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">yaml-files</span><span class="p">:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'*.yaml'</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'*.yml'</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'.yamllint'</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nt">ignore</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="no">.terraform</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="nt">rules</span><span class="p">:</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="nt">new-lines</span><span class="p">:</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dos</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are working on a Windows Machine, use rule to force the type of new line characters</p>
+</div>
+<p>Run <code>yamllint</code> in <code>nac-catalystcenter-comprehensive-example</code> repository folder you created in <a href="../lab2_fabric_deployment/">Lab 2 - Fabric Deployment</a></p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>PS<span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\a</span>dmin<span class="se">\D</span>esktop<span class="se">\n</span>ac-catalystcenter-comprehensive-example&gt;<span class="w"> </span>yamllint<span class="w"> </span>data/
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There should be no errors in yaml files in the <code>data</code> folder, if you have errors then fix them before proceeding with next steps.</p>
+</div>
+<p>When using a git repository, it is advised to include these steps in a pre-commit hook. This is a client side action that will run each time that you commit a change. To do that you can create a <code>.pre-commit-config.yaml</code> file. Note that it is possible to write your own scripts but one of the advantages of <code>pre-commit</code> is that you can leverage a large ecosystem of hooks made by other people. Many other examples for <code>pre-commit</code> can be found at <a href="https://pre-commit.com/hooks.html">https://pre-commit.com/hooks.html</a>.</p>
+<p>Navigate to the <code>nac-catalystcenter-comprehensive-example</code> folder and create <code>.pre-commit-config.yaml</code> with the following content:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">repos</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/adrienverge/yamllint.git</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.28.0</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yamllint</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^data/.*\.(yml|yaml)$</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>PS C:\Users\admin\Desktop\nac-catalystcenter-comprehensive-example\data&gt; cd ..
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>PS C:\Users\admin\Desktop\nac-catalystcenter-comprehensive-example&gt; ni .pre-commit-config.yaml
+</span></code></pre></div>
+<p>To make use of this configuration, you must first install and initialize <code>pre-commit</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pip install pre-commit
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>pre-commit install
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>pre-commit installed at .git/hooks/pre-commit
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the <code>pre-commit install</code> must be run from the root of the repository.</p>
+</div>
+<p>And make sure to add <code>.pre-commit-config.yaml</code> with <code>git add</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>git add .pre-commit-config.yaml
+</span></code></pre></div>
+<p>The next time you run <code>git commit</code>, the hook will initiate <code>yamllint</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>git commit -m "updating configuration"
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>yamllint.............................................(no files to check)Skipped
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>[main ef960d8] updating configuration
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a> 1 file changed, 0 insertions(+), 0 deletions(-)
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a> create mode 100644 .pre-commit-config.yaml
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the <code>yamllint</code> pre-commit hook runs only on files in the staging area. To detect linting issues in your YAML files, you need to edit the files, add them to the staging area, and then commit the changes</p>
+</div>
+<p>Let's intentionally introduce some linting issues in the <code>sites.nac.yaml</code> file by adding random spaces. Save the file, add it to Git, and attempt to commit:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>git add .
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>git commit -m "sites.nac.yaml modifications"
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>yamllint.................................................................Failed
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>- hook id: yamllint
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>- exit code: 1
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>data/sites.nac.yaml
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  4:6       error    wrong indentation: expected 4 but found 5  (indentation)
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>  5:7       error    wrong indentation: expected 7 but found 6  (indentation)
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>  9:8       error    syntax error: expected &lt;block end&gt;, but found '&lt;block sequence start&gt;' (syntax)     
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>  10:9      error    wrong indentation: expected 9 but found 8  (indentation)
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>  12:9      error    wrong indentation: expected 9 but found 8  (indentation)
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>  15:5      error    wrong indentation: expected 2 but found 4  (indentation)
+</span></code></pre></div>
+<p>As you can see, the pre-commit hook prevents committing changes that contain linting errors. This is helpful for catching human errors in YAML syntax before they are committed to the repository.</p>
+<p>Fix the linting errors you introduced before proceeding with Semantic and Syntactic Validation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There should be no errors in yaml files in the <code>data</code> folder, if you have errors then fix them before proceeding with next steps.</p>
+</div>
+<p>The downside of pre-commit hooks is that they run exclusively on your system. If a contributor to your project does not have the same hooks installed, they may commit code that violates your pre-commit hooks. If you use GitHub, you can integrate pre-commit hooks in your CI workflow. At the moment of writing, this is only available for GitHub. Visit <a href="https://pre-commit.com">https://pre-commit.com</a> for more information. For GitLab CI users it is possible to run a job to check whether the pre-commit hooks were properly applied. Below is an example of adding a linting stage to your <code>.gitlab-ci.yml</code>. <strong>This step will not be explored further, and there is no need to add it to your GitLab CI file.</strong></p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">yamllint</span><span class="p">:</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linting</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry.gitlab.com/pipeline-components/yamllint:latest</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yamllint data/</span>
+</span></code></pre></div>
+<h2 id="step-2-semantic-and-syntactic-validation">Step 2: Semantic and Syntactic Validation<a class="headerlink" href="#step-2-semantic-and-syntactic-validation" title="Permanent link">¶</a></h2>
+<p>Semantic validation is the process of checking the meaning of data to ensure accuracy and correctness. This can involve validating data against a set of rules, making sure it conforms to certain expectations. Syntactic validation is the process of validating data against a set of predetermined rules. This ensures that information entered into a system meets the requirements for it to be accepted and processed correctly. Syntactic validation can involve using regular expressions to check for specific patterns, or comparison operators to check if values meet certain criteria.</p>
+<p>The open-source <code>nac-validate</code> Python tool can be used to perform syntactic and semantic validation of YAML files. Syntactic validation is done by basic YAML syntax validation (e.g., indentation) and by providing a <a href="https://github.com/23andMe/Yamale">Yamale</a> schema and validating all YAML files against that schema. Semantic validation is done by providing a set of rules (implemented in Python) which are then validated against the YAML data. Every rule is implemented as a Python class and should be placed in a <code>.py</code> file located in the <code>--rules</code> path.</p>
+<p>Each <code>.py</code> file must have a single class named <code>Rule</code>. This class must have the following attributes: <code>id</code>, <code>description</code>, and <code>severity</code>. It must implement a <code>classmethod()</code> named <code>match</code> that has a single function argument data which is the data read from all YAML files. It should return a list of strings, one for each rule violation with a descriptive message. For the purpose of this lab, several scripts have already been shared with you in the repository.</p>
+<p>Python 3.10+ is required to install nac-validate. It can be installed using pip:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pip install nac-validate==1.0.0
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that <code>nac-validate</code> has already been installed on your lab workstation.</p>
+</div>
+<p>It may also be integrated via a pre-commit hook with the following <code>.pre-commit-config.yaml</code>, assuming the default values are used (<code>.schema.yaml</code>, <code>.rules/</code>).</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">repos</span><span class="p">:</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/netascode/nac-validate</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.0.0</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nac-validate</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'--non-strict'</span>
+</span></code></pre></div>
+<p>In case the schema or validation rules are located somewhere else, the required CLI arguments can be added like this:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">repos</span><span class="p">:</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/netascode/nac-validate</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.0.0</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nac-validate</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">        </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'--non-strict'</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'-s'</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'my_schema.yaml'</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'-r'</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'rules/'</span>
+</span></code></pre></div>
+<p>An example <code>.schema.yaml</code> can be found <a href="https://github.com/netascode/nac-catalystcenter-validate">here</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Cisco Services as Code</p>
+<p>The <code>.schema.yaml</code> file used in this lab is a partial schema provided as an example for learning purposes. A comprehensive, production-ready schema covering all CatalystCenter resources, along with an extensive library of pre-built validation rules, is available as part of Cisco's <strong>Services as Code</strong> commercial offering. This enterprise solution provides complete validation coverage, ongoing updates, and professional support to ensure your infrastructure as code implementations meet the highest standards.</p>
+</div>
+<p>Copy the <code>.schema.yaml</code> file from this repository to your <code>nac-catalystcenter-comprehensive-example</code> repository.</p>
+<p>Commit the <code>.schema.yaml</code> file to your repository:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>git add .schema.yaml
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>git commit -m "Add schema validation file"
+</span></code></pre></div>
+<p>Run command <code>nac-validate --non-strict data/ -v DEBUG</code> to check if the files in the data folder are syntactically correct:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nac-validate --non-strict data/ -v DEBUG
+</span></code></pre></div>
+<p>In the output, you should see INFO logs showing that the schema was loaded and all files that were validated against that schema:</p>
+<p>Output without any errors means that everything matches the schema and there are no syntax errors.</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>INFO<span class="w"> </span>-<span class="w"> </span>Loading<span class="w"> </span>schema
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>INFO<span class="w"> </span>-<span class="w"> </span>No<span class="w"> </span>rules<span class="w"> </span>found
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/network_settings.nac.yaml
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/fabric.nac.yaml
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/templates.nac.yaml
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/sites.nac.yaml
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/devices.nac.yaml
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/network_profiles.nac.yaml
+</span></code></pre></div>
+<p>Now, let's modify the <code>.schema.yaml</code> file to make the <code>address</code> setting under <code>site_buildings</code> a mandatory attribute by removing <code>required=False</code>.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">site_buildings</span><span class="p">:</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str()</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="nt">parent_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str()</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">num(required=False)</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">num(required=False)</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str()</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="nt">country</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str(required=False)</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">  </span><span class="nt">ip_pools_reservations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">list(str(), required=False)</span>
+</span></code></pre></div>
+<p>If the address is not provided for a building, the validation will fail:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nac-validate --non-strict data/ -v DEBUG
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>INFO - Loading schema
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>INFO - No rules found
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>INFO - Validate file: data/network_settings.nac.yaml
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>INFO - Validate file: data/fabric.nac.yaml
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>INFO - Validate file: data/templates.nac.yaml
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>INFO - Validate file: data/sites.nac.yaml
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>ERROR - Syntax error 'data/sites.nac.yaml': catalyst_center.sites.buildings.0.address: Required field missing
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>INFO - Validate file: data/devices.nac.yaml
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>INFO - Validate file: data/network_profiles.nac.yaml
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the <code>--non-strict</code> flag is added above, which allows unexpected elements in the <code>.yaml</code> files. In other words, this means that it is not required to have a matching check in <code>.schema.yaml</code> for each resource defined in the <code>.yaml</code> files.</p>
+</div>
+<p>Add back <code>required=False</code> to the <code>address</code> attribute in the <code>.schema.yaml</code> file and run <code>nac-validate</code> again.</p>
+<p>Update <code>.schema.yaml</code>:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="w">  </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str(required=False)</span>
+</span></code></pre></div>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>nac-validate<span class="w"> </span>--non-strict<span class="w"> </span>data/<span class="w"> </span>-v<span class="w"> </span>DEBUG
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>INFO - Loading schema
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>INFO - No rules found
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>INFO - Validate file: data/network_settings.nac.yaml
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>INFO - Validate file: data/fabric.nac.yaml
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>INFO - Validate file: data/templates.nac.yaml
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>INFO - Validate file: data/sites.nac.yaml
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>INFO - Validate file: data/devices.nac.yaml
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>INFO - Validate file: data/network_profiles.nac.yaml
+</span></code></pre></div>
+<p>In addition to syntactic validation, which checks the structure and format of your data, semantic validation can be used to verify the logical correctness of your configuration. While syntactic validation ensures your YAML is properly formatted, semantic validation uses custom Python rules to check for issues like missing references, conflicting configurations, or invalid relationships between resources. </p>
+<p>Below is an example of a semantic validation rule to detect overlapping IP Pools:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ipaddress</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Rule</span><span class="p">:</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>    <span class="nb">id</span> <span class="o">=</span> <span class="s2">"104"</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>    <span class="n">description</span> <span class="o">=</span> <span class="s2">"Verify IP Pool subnet overlap"</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>    <span class="n">severity</span> <span class="o">=</span> <span class="s2">"HIGH"</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>    <span class="nd">@classmethod</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">match</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>            <span class="n">pools_subnets</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>            <span class="k">for</span> <span class="n">pool</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"catalyst_center"</span><span class="p">][</span><span class="s2">"network_settings"</span><span class="p">][</span><span class="s2">"ip_pools"</span><span class="p">]:</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>                <span class="n">pools_subnets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_network</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="s2">"ip_pool_cidr"</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">subnet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pools_subnets</span><span class="p">):</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>                <span class="k">if</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pools_subnets</span><span class="p">):</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>                    <span class="k">break</span>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>                <span class="k">for</span> <span class="n">other_subnet</span> <span class="ow">in</span> <span class="n">pools_subnets</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]:</span>
+</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a>                    <span class="k">if</span> <span class="n">subnet</span><span class="o">.</span><span class="n">overlaps</span><span class="p">(</span><span class="n">other_subnet</span><span class="p">):</span>
+</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a>                        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"catalyst_center.network_settings.ip_pools.ip_pool_cidr: </span><span class="si">{}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subnet</span><span class="p">,</span> <span class="n">pool</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]))</span> 
+</span><span id="__span-23-21"><a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a>        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+</span><span id="__span-23-22"><a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a>            <span class="k">pass</span>
+</span><span id="__span-23-23"><a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a>        <span class="k">return</span> <span class="n">results</span>
+</span></code></pre></div>
+<p>Create a <code>.rules/</code> folder inside your <code>nac-catalystcenter-comprehensive-example</code> repo and create a new python file: <code>pools_overlap.py</code>. Copy and paste provided Python code into newly created <code>pools_overlap.py</code> file.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>.
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>├── .rules
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>│   └── pools_overlap.py
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>├── .schema.yaml
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>├── data
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>│   ├── ip_pools.nac.yaml
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>│   └── sites.nac.yaml
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>└── main.tf
+</span></code></pre></div>
+<p>Commit the new validation rule:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>git add .rules/
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>git commit -m "Add semantic validation rule for IP pool overlap"
+</span></code></pre></div>
+<p>Now, let's test the semantic validation by intentionally adding an overlapping IP Pool. Add new IP Pool <code>PRINTERS</code> with <code>ip_pool_cidr: 192.168.24.0/24</code> to the <code>network_settings.nac.yaml</code> file:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">US_PRINTERS</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">        </span><span class="nt">ip_address_space</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IPv4</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">        </span><span class="nt">ip_pool_cidr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.24.0/24</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">        </span><span class="nt">dhcp_servers</span><span class="p">:</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.201.0.1</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">        </span><span class="nt">dns_servers</span><span class="p">:</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.201.0.1</span>
+</span></code></pre></div>
+<p>The following error is returned when overlapping IP Pools have been specified in any of the <code>*.yaml</code> files in the <code>data/</code> folder while running <code>nac-validate</code>:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>nac-validate<span class="w"> </span>--non-strict<span class="w"> </span>data/<span class="w"> </span>-v<span class="w"> </span>DEBUG
+</span></code></pre></div>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>INFO<span class="w"> </span>-<span class="w"> </span>Loading<span class="w"> </span>schema
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>INFO<span class="w"> </span>-<span class="w"> </span>Loading<span class="w"> </span>rules
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/network_settings.nac.yaml
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/fabric.nac.yaml
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/templates.nac.yaml
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/sites.nac.yaml
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/devices.nac.yaml
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>INFO<span class="w"> </span>-<span class="w"> </span>Validate<span class="w"> </span>file:<span class="w"> </span>data/network_profiles.nac.yaml
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>INFO<span class="w"> </span>-<span class="w"> </span>Loading<span class="w"> </span>yaml<span class="w"> </span>files<span class="w"> </span>from<span class="w"> </span><span class="o">[</span>PosixPath<span class="o">(</span><span class="s1">'data'</span><span class="o">)]</span>
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>INFO<span class="w"> </span>-<span class="w"> </span>Verifying<span class="w"> </span>rule<span class="w"> </span>id<span class="w"> </span><span class="m">104</span>
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>ERROR<span class="w"> </span>-<span class="w"> </span>Semantic<span class="w"> </span>error,<span class="w"> </span>rule<span class="w"> </span><span class="m">104</span>:<span class="w"> </span>Verify<span class="w"> </span>IP<span class="w"> </span>Pool<span class="w"> </span>subnet<span class="w"> </span>overlap<span class="w"> </span><span class="o">([</span><span class="s1">'catalyst_center.network_settings.ip_pools.ip_pool_cidr: 192.168.24.0/24 - Overlay'</span><span class="o">])</span>
+</span></code></pre></div>
+<p>As expected, the validation detected the overlapping IP pool! This demonstrates how semantic validation can catch logical errors that syntactic validation would miss.</p>
+<p>Remove the <code>US_PRINTERS</code> IP pool from the <code>network_settings.nac.yaml</code> file to clean up your configuration before proceeding to the next step.</p>
+<p>Run <code>nac-validate</code> again to confirm there are no errors:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nac-validate --non-strict data/ -v DEBUG
+</span></code></pre></div>
+<p>Since you never committed the <code>US_PRINTERS</code> addition (it was just for testing), removing it returns the file to its original state with no changes to commit.</p>
+<p>For more example rules, click <a href="https://github.com/netascode/nac-catalystcenter-validate">here</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Cisco Services as Code - Validation Rules</p>
+<p>The semantic validation rule demonstrated in this lab is a simple example. Cisco's <strong>Services as Code</strong> offering includes a comprehensive library of production-ready validation rules. These rules are continuously maintained and updated by Cisco experts to help you catch semantic errors in your data model before attempting to deploy using Terraform, preventing configuration issues early in the development process.</p>
+</div>
+<h2 id="step-3-cicd-integration">Step 3: CI/CD Integration<a class="headerlink" href="#step-3-cicd-integration" title="Permanent link">¶</a></h2>
+<p>Now that you've learned how to validate your YAML files locally using <code>nac-validate</code>, it's time to integrate these validation checks into your CI/CD pipeline. This ensures that every code change is automatically validated before it's deployed, catching errors early in the development process.</p>
+<p>In <a href="../lab4_cicd/">Lab 4 - CI/CD Integration</a>, you created GitLab pipelines for both ISE and CatalystCenter projects. Now, you'll enhance the CatalystCenter pipeline by adding <code>nac-validate</code> to the existing validation stage.</p>
+<p>Navigate to your <code>nac-catalystcenter-comprehensive-example</code> repository and open the <code>.gitlab-ci.yml</code> file.</p>
+<p>Update the existing <code>validate</code> job to include <code>nac-validate</code> alongside the <code>terraform fmt -check</code> command:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nt">validate</span><span class="p">:</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validate</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">set -o pipefail &amp;&amp; terraform fmt -check |&amp; tee fmt_output.txt</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">set -o pipefail &amp;&amp; nac-validate --non-strict ./data/ -v DEBUG |&amp; tee validate_output.txt</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fmt_output.txt</span>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validate_output.txt</span>
+</span></code></pre></div>
+<p>The updated validation job now:</p>
+<ol>
+<li><strong>Checks Terraform Formatting</strong>: Ensures your Terraform code follows proper formatting standards</li>
+<li><strong>Validates YAML Files</strong>: Runs <code>nac-validate</code> against all files in the <code>data/</code> folder to check both syntactic and semantic correctness</li>
+<li><strong>Saves Output</strong>: Stores both outputs as artifacts that you can review in GitLab</li>
+</ol>
+<p>The <code>set -o pipefail</code> ensures that if any command in the pipeline fails, the entire job fails, and the <code>tee</code> command saves the output to files while also displaying it in the console.</p>
+<p>Save the file (Ctrl + S).</p>
+<p>Commit and push your changes to GitLab:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>git add .gitlab-ci.yml
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>git commit -m "Add nac-validate to pipeline"
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>git push
+</span></code></pre></div>
+<p>Navigate to your CatalystCenter project in GitLab and go to <code>Build</code> &gt; <code>Pipelines</code>. You should see a new pipeline running with the updated <code>validate</code> stage.</p>
+<p>Click on the pipeline to view the validation results. The <code>validate</code> job will now show you both formatting issues and validation errors found in your configuration files.</p>
+<figure>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/nac-cc-comprehensive-example-validate.png" data-desc-position="bottom"><img alt="" src="../assets/nac-cc-comprehensive-example-validate.png" width="800"></a></p>
+</figure>
+<p>By integrating <code>nac-validate</code> into your CI/CD pipeline, you ensure that only properly formatted and validated configurations can proceed to deployment, significantly reducing the risk of configuration errors in production.</p>
+<h2 id="step-4-post-deployment-testing">Step 4: Post-Deployment Testing<a class="headerlink" href="#step-4-post-deployment-testing" title="Permanent link">¶</a></h2>
+<p>After deploying your infrastructure, it's important to verify that the configuration was applied correctly. The <code>nac-test</code> tool enables automated post-deployment testing by rendering and executing <a href="https://robotframework.org/">Robot Framework</a> tests using <a href="https://jinja.palletsprojects.com/">Jinja</a> templating. This allows you to dynamically generate test suites from your desired infrastructure state expressed in YAML syntax.</p>
+<p>All data from the YAML files (<code>--data</code> option) is combined into a single data structure which is then used as input for the templating process. Each template in the <code>--templates</code> path is rendered and written to the <code>--output</code> path. If the <code>--templates</code> path has subfolders, the folder structure is retained when rendering the templates.</p>
+<div class="admonition warning">
+<p class="admonition-title">Windows Compatibility</p>
+<p><strong>Note that <code>nac-test</code> is not compatible with Windows</strong> and cannot be directly run on the Windows workstation in this lab. The commands and examples below are provided as reference for Linux/Mac environments. However, you can still understand how post-deployment testing works by examining the test templates and integrating them into your GitLab CI/CD pipeline, which runs on Linux-based runners.</p>
+</div>
+<h3 id="understanding-test-templates">Understanding Test Templates<a class="headerlink" href="#understanding-test-templates" title="Permanent link">¶</a></h3>
+<p>To see how post-deployment testing works, let's examine a sample Robot Framework test template. Copy the <code>tests/</code> folder from the <a href="https://github.com/netascode/nac-catalystcenter-validate">nac-catalystcenter-validate</a> repository to your <code>nac-catalystcenter-comprehensive-example</code> repository.</p>
+<p>Inside the <code>tests/templates/</code> folder, you'll find test templates like <code>area.robot</code> which verifies that areas in the site hierarchy were configured correctly:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>*** Settings ***
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>Documentation   Verify Site Hierarchy Areas
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Suite Setup     Login CatalystCenter
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>Resource        ../../catalyst_center_common.resource
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>Default Tags    config   catalyst_center   site_hierarchy   sites   areas
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>*** Test Cases ***
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>Get Site Hierarchy Areas
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>    ${r}=   GET On Session   CatalystCenter_Session   /dna/intent/api/v2/site
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>    Log   Response Status Code: ${r.status_code}
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>    Set Suite Variable   ${r}
+</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a>
+</span><span id="__span-32-14"><a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>{% for area in catalyst_center.sites.areas | default([]) %}
+</span><span id="__span-32-15"><a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>{% if area.name != "Global" %}
+</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a>Verify Area {{ area.parent_name | default(defaults.catalyst_center.sites.areas.parent_name) }}/{{ area.name }}
+</span><span id="__span-32-17"><a id="__codelineno-32-17" name="__codelineno-32-17" href="#__codelineno-32-17"></a>    # Dynamically construct the nameHierarchy without a leading slash if area.parent_name is empty
+</span><span id="__span-32-18"><a id="__codelineno-32-18" name="__codelineno-32-18" href="#__codelineno-32-18"></a>    ${nameHierarchy}=   Evaluate   '{{ area.parent_name | default(defaults.catalyst_center.sites.areas.parent_name) }}/{{ area.name }}' if '{{ area.parent_name | default(defaults.catalyst_center.sites.areas.parent_name) }}' else '{{ area.name }}'
+</span><span id="__span-32-19"><a id="__codelineno-32-19" name="__codelineno-32-19" href="#__codelineno-32-19"></a>
+</span><span id="__span-32-20"><a id="__codelineno-32-20" name="__codelineno-32-20" href="#__codelineno-32-20"></a>    # Check if area exists in API response
+</span><span id="__span-32-21"><a id="__codelineno-32-21" name="__codelineno-32-21" href="#__codelineno-32-21"></a>    ${area}=   Set Variable   $.response[?(@.groupNameHierarchy=='${nameHierarchy}')]
+</span><span id="__span-32-22"><a id="__codelineno-32-22" name="__codelineno-32-22" href="#__codelineno-32-22"></a>    Should Be Equal Value Json String   ${r.json()}   ${area}.name  {{ area.name }}
+</span><span id="__span-32-23"><a id="__codelineno-32-23" name="__codelineno-32-23" href="#__codelineno-32-23"></a>    ${parent_id}=   Get Value From Json   ${r.json()}   ${area}.parentId
+</span><span id="__span-32-24"><a id="__codelineno-32-24" name="__codelineno-32-24" href="#__codelineno-32-24"></a>    ${params}=   Create Dictionary   siteId=${parent_id}[0]
+</span><span id="__span-32-25"><a id="__codelineno-32-25" name="__codelineno-32-25" href="#__codelineno-32-25"></a>    ${r}=   GET On Session   CatalystCenter_Session   /dna/intent/api/v1/site   params=${params}
+</span><span id="__span-32-26"><a id="__codelineno-32-26" name="__codelineno-32-26" href="#__codelineno-32-26"></a>    Should Be Equal Value Json String   ${r.json()}   $..response.siteNameHierarchy   {{ area.parent_name }}
+</span><span id="__span-32-27"><a id="__codelineno-32-27" name="__codelineno-32-27" href="#__codelineno-32-27"></a>{% endif %}
+</span><span id="__span-32-28"><a id="__codelineno-32-28" name="__codelineno-32-28" href="#__codelineno-32-28"></a>{% endfor %}
+</span></code></pre></div>
+<p>This template demonstrates how Jinja templating is used to dynamically generate test cases for each area defined in your YAML configuration files. The <code>{% for %}</code> loop creates a test case for every area, verifying that it exists in Catalyst Center with the correct properties.</p>
+<h3 id="reference-installing-and-running-nac-test-linuxmac-only">Reference: Installing and Running nac-test (Linux/Mac Only)<a class="headerlink" href="#reference-installing-and-running-nac-test-linuxmac-only" title="Permanent link">¶</a></h3>
+<p>For reference, here's how you would install and run <code>nac-test</code> on a Linux or Mac system:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>pip install nac-test==1.0.0
+</span></code></pre></div>
+<p>Set environment variables:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>export CC_URL=https://198.18.129.100
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>export CC_USERNAME=admin
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>export CC_PASSWORD=C1sco12345
+</span></code></pre></div>
+<p>Run the tests:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>nac-test --data ./data --output ./tests/results/catalystcenter --templates ./tests/templates/
+</span></code></pre></div>
+<p>Example output of running a test to verify that the area was configured successfully on Catalyst Center:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>nac-test --data ./data --output ./tests/results/catalystcenter --templates ./tests/templates/
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>Robot Framework remote server at 127.0.0.1:56366 started.
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>Storing .pabotsuitenames file
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>2025-12-30 21:08:00.421153 [PID:19362] [0] [ID:0] EXECUTING Catalystcenter.Config.Sites.Area
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>2025-12-30 21:08:02.602790 [PID:19362] [0] [ID:0] PASSED Catalystcenter.Config.Sites.Area in 2.1 seconds
+</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>3 tests, 3 passed, 0 failed, 0 skipped.
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>===================================================
+</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>Output:  /Users/kmazurki/Documents/CISCO_LIVE_EMEA/nac-catalystcenter-comprehensive-example/tests/results/catalystcenter/output.xml
+</span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>XUnit:   /Users/kmazurki/Documents/CISCO_LIVE_EMEA/nac-catalystcenter-comprehensive-example/tests/results/catalystcenter/xunit.xml
+</span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>Log:     /Users/kmazurki/Documents/CISCO_LIVE_EMEA/nac-catalystcenter-comprehensive-example/tests/results/catalystcenter/log.html
+</span><span id="__span-36-12"><a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>Report:  /Users/kmazurki/Documents/CISCO_LIVE_EMEA/nac-catalystcenter-comprehensive-example/tests/results/catalystcenter/report.html
+</span><span id="__span-36-13"><a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a>Stopping PabotLib process
+</span><span id="__span-36-14"><a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a>Robot Framework remote server at 127.0.0.1:56366 stopped.
+</span><span id="__span-36-15"><a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>PabotLib process stopped
+</span><span id="__span-36-16"><a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>Total testing: 2.10 seconds
+</span><span id="__span-36-17"><a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a>Elapsed time:  2.44 seconds
+</span></code></pre></div>
+<h3 id="integrating-post-deployment-tests-into-gitlab-cicd">Integrating Post-Deployment Tests into GitLab CI/CD<a class="headerlink" href="#integrating-post-deployment-tests-into-gitlab-cicd" title="Permanent link">¶</a></h3>
+<p>While you cannot run <code>nac-test</code> locally on Windows, you can integrate it into your GitLab CI/CD pipeline, which runs on Linux-based runners. This allows you to automatically verify your deployment after the <code>deploy</code> stage completes.</p>
+<p>Add a new <code>test-config</code> job to your <code>.gitlab-ci.yml</code> file in the <code>nac-catalystcenter-comprehensive-example</code> repository:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nt">test-config</span><span class="p">:</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">set -o pipefail &amp;&amp; nac-test -d ./data -d defaults.yaml -t ./tests/templates -o ./tests/results/cc |&amp; tee test_output.txt</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests/results/cc/*.html</span>
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests/results/cc/xunit.xml</span>
+</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_output.txt</span>
+</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="w">    </span><span class="nt">reports</span><span class="p">:</span>
+</span><span id="__span-37-12"><a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="w">      </span><span class="nt">junit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests/results/cc/xunit.xml</span>
+</span><span id="__span-37-13"><a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="w">  </span><span class="nt">dependencies</span><span class="p">:</span>
+</span><span id="__span-37-14"><a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
+</span><span id="__span-37-15"><a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="w">  </span><span class="nt">needs</span><span class="p">:</span>
+</span><span id="__span-37-16"><a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
+</span><span id="__span-37-17"><a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a><span class="w">  </span><span class="nt">only</span><span class="p">:</span>
+</span><span id="__span-37-18"><a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+</span></code></pre></div>
+<p>Make sure your pipeline stages include <code>test</code>:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nt">stages</span><span class="p">:</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validate</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plan</span>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cleanup</span>
+</span></code></pre></div>
+<p>This job will:</p>
+<ol>
+<li><strong>Run After Deployment</strong>: The <code>needs</code> and <code>dependencies</code> ensure it runs only after successful deployment</li>
+<li><strong>Execute Tests</strong>: Runs <code>nac-test</code> against your configuration and validates it against Catalyst Center</li>
+<li><strong>Generate Reports</strong>: Creates HTML and JUnit XML reports that GitLab can display</li>
+<li><strong>Save Artifacts</strong>: Stores test results for review, even if tests fail (<code>when: always</code>)</li>
+<li><strong>GitLab Integration</strong>: The <code>junit</code> report allows GitLab to display test results directly in the pipeline view</li>
+</ol>
+<p>Save the file (Ctrl + S), then commit and push your changes:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>git add .gitlab-ci.yml tests/
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>git commit -m "Add post-deployment configuration testing to pipeline"
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>git push
+</span></code></pre></div>
+<p>Navigate to your CatalystCenter project in GitLab and go to <code>Build</code> &gt; <code>Pipelines</code>. You should see a new pipeline running.</p>
+<div class="admonition note">
+<p class="admonition-title">Triggering the Test Stage</p>
+<p>Since your pipeline has a <strong>manual deploy job</strong>, you need to click the <strong>Run</strong> icon on the <code>deploy</code> job to trigger it. Because you didn't change anything in the <code>data/</code> folder in your last commit, the <code>plan</code> stage will show <strong>"No changes. Your infrastructure matches the configuration."</strong> When you run the deploy job, Terraform won't make any changes since it's idempotent - but this is exactly how you can trigger the <code>test-config</code> job to see the post-deployment testing in action. The <code>test-config</code> job will automatically run after the deploy job completes and verify your current configuration against Catalyst Center.</p>
+</div>
+<p>Once the pipeline finishes, click on the <code>test-config</code> job to view the test execution details. </p>
+<figure>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/nac-cc-cicd-validate0.png" data-desc-position="bottom"><img alt="" src="../assets/nac-cc-cicd-validate0.png" width="1000"></a></p>
+</figure>
+<p>Once the tests complete, you can download artifacts to view the results. Click on the <strong>Browse</strong> button next to the artifacts section and navigate to <code>/tests/results/cc</code> to view the test results. The artifacts include detailed HTML reports generated by Robot Framework:</p>
+<ul>
+<li><code>log.html</code> - Detailed test execution log with step-by-step results</li>
+<li><code>report.html</code> - High-level test report with statistics and pass/fail information</li>
+<li><code>xunit.xml</code> - JUnit-compatible XML report for GitLab integration</li>
+</ul>
+<figure>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/nac-cc-cicd-validate1.png" data-desc-position="bottom"><img alt="" src="../assets/nac-cc-cicd-validate1.png" width="800"></a></p>
+</figure>
+<div class="admonition info">
+<p class="admonition-title">GitLab Test Reports</p>
+<p>GitLab provides native integration with JUnit test reports. The <code>XUnit</code> output generated by <code>nac-test</code> can be viewed directly in GitLab's pipeline interface, showing which tests passed or failed. See the <a href="https://docs.gitlab.com/ee/ci/testing/unit_test_reports.html">GitLab Unit Test Reports documentation</a> for more information.</p>
+</div>
+<p>To view JUnit test results select <strong>Tests</strong> tab in your pipeline details page:</p>
+<figure>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/nac-cc-cicd-validate2.png" data-desc-position="bottom"><img alt="" src="../assets/nac-cc-cicd-validate2.png" width="1000"></a></p>
+</figure>
+<p>Congratulations! You have completed Lab 5 and learned how to implement a complete validation strategy including linting, syntactic and semantic validation, CI/CD integration, and post-deployment testing. These practices significantly improve the reliability and quality of your infrastructure as code implementations.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../lab4_cicd/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab 4 — CI/CD Integration">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Lab 4 — CI/CD Integration
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../lab6_multiproject_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 6 (Optional) — MultiProject CI/CD Pipeline">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Lab 6 (Optional) — MultiProject CI/CD Pipeline
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025 Cisco Systems, Inc. — LTRENS-3751 Cisco Live Lab Guide
+
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/cisco-docs" target="_blank" rel="noopener" title="Cisco Docs on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "search.highlight", "search.share", "search.suggest", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
