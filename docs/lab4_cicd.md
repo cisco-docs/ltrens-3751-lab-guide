@@ -34,10 +34,10 @@ A GitLab account has already been set up for you. Below are the credentials to a
 !!! note
     Note that all GitLab features used in this guide are available in the free tier. For more information about features and pricing see: [GitLab Pricing](https://about.gitlab.com/pricing/)
 
-!!! note
+<!-- !!! note
     You will be required to generate a new Token for GitLab access as it might have expired, causing the pipeline to fail. Follow the steps below to generate a new token:
 
-<!-- **`GITLAB_TOKEN` Change Procedure**
+**`GITLAB_TOKEN` Change Procedure**
 
   - From Gitlab home, click on `Groups` -> `sda_as_code` 
   - On the left pane select `Settings` -> `Access Tokens`
