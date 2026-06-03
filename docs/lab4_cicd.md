@@ -39,7 +39,7 @@ A GitLab account has already been set up for you. Below are the credentials to a
 
 **`GITLAB_TOKEN` Change Procedure**
 
-  - From Gitlab home, click on `Groups` -> `labuser` 
+  - From Gitlab home, click on `Groups` -> `sda_as_code` 
   - On the left pane select `Settings` -> `Access Tokens`
   - There should be a token already created with the name `GITLAB_TOKEN`. Click the Refresh icon to regenerate the new token. Copy the new token as you will only see it once. 
   - Now, on the left pane, select `CI/CD` -> `Variables`
