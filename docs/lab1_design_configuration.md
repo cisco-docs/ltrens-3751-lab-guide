@@ -35,7 +35,7 @@ Receiving objects: 100% (37/37), 7.65 KiB | 711.00 KiB/s, done.
 Resolving deltas: 100% (13/13), done.
 ```
 
-Then open the newly created folder in "Visual Studio Code".
+Then open the newly created folder in "Visual Studio Code". It will ask you for the location on the upper bar - type in `/home/cisco/nac-catalystcenter-simple-example`
 
 <figure markdown>
   ![](./assets/vs_terminal2.png){ width="400" }
