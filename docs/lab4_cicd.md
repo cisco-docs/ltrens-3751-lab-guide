@@ -37,7 +37,7 @@ A GitLab account has already been set up for you. Below are the credentials to a
 !!! note
     You will be required to generate a new Token for GitLab access as it might have expired, causing the pipeline to fail. Follow the steps below to generate a new token:
 
-**`GITLAB_TOKEN` Change Procedure**
+<!-- **`GITLAB_TOKEN` Change Procedure**
 
   - From Gitlab home, click on `Groups` -> `sda_as_code` 
   - On the left pane select `Settings` -> `Access Tokens`
@@ -46,7 +46,7 @@ A GitLab account has already been set up for you. Below are the credentials to a
   - Locate the variable `GITLAB_TOKEN` and click the Edit icon to edit the variable.
   - Paste the new token in the `Value` field and click on `Save changes`
 
-Now, please continue with the lab and the CI/CD pipeline should be working as expected. 
+Now, please continue with the lab and the CI/CD pipeline should be working as expected.  -->
 
 **Import repository**
 
