@@ -1558,33 +1558,26 @@ Now, please continue with the lab and the CI/CD pipeline should be working as ex
 <figure>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/nac-ise-cicd-example-fig4.png" data-desc-position="bottom"><img alt="" src="../assets/nac-ise-cicd-example-fig4.png" width="800"></a></p>
 </figure>
-<p>Start "Visual Studio Code" and open a new terminal by selecting <code>Terminal -&gt; New Terminal</code> from the menu.</p>
+<p>Back in "Visual Studio Code", go to terminal </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Make sure you are not in the existing git repository, otherwise you will get an error. Use <code>cd ..</code> to go up one level.</p>
+<p>Make sure you are not in the existing git repository, otherwise you will get an error. Use <code>cd ..</code> to go up one level. You should be at <code>PS C:\Users\admin\Documents\sda_as_code&gt;</code> prompt.</p>
 </div>
 <p>In the terminal window type the following command to clone the repository:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git -c http.sslVerify=false clone https://198.18.133.101/sda_as_code/nac-ise-comprehensive-example.git
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You might be prompted for username and password (root/C1sco12345)</p>
+<p>You might be prompted for username and password (root/C1sco12345) on top of the search bar.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PS C:\Users\admin\Desktop&gt; git -c http.sslVerify=false clone https://198.18.133.101/sda_as_code/nac-ise-comprehensive-example.git
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PS C:\Users\admin\Documents\sda_as_code&gt; git -c http.sslVerify=false clone https://198.18.133.101/sda_as_code/nac-ise-comprehensive-example.git
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Cloning into 'nac-ise-comprehensive-example'...
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>remote: Enumerating objects: 23, done.
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>remote: Total 23 (delta 0), reused 0 (delta 0), pack-reused 23 (from 1)
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Receiving objects: 100% (23/23), 4.07 KiB | 297.00 KiB/s, done.
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Resolving deltas: 100% (9/9), done.
 </span></code></pre></div>
-<p>Then open the newly created folder in "Visual Studio Code".</p>
-<figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/vs_terminal2.png" data-desc-position="bottom"><img alt="" src="../assets/vs_terminal2.png" width="400"></a></p>
-</figure>
-<p>On the Workspace Trust dialog, select <strong>Yes, I trust the authors</strong> to enable all features in the workspace.</p>
-<figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/vs_terminal3.png" data-desc-position="bottom"><img alt="" src="../assets/vs_terminal3.png" width="400"></a></p>
-</figure>
+<p>Then expand the newly created folder in the explorer <code>nac-ise-comprehensive-example</code> icon.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Note that <code>git</code> command was executed with option <code>-c http.sslVerify=false</code> which is used to disable SSL certificate verification when making HTTPS requests. This means that Git will not check the validity Gitlab self-signed SSL certificate. You can enable the option globally for all future Git operations by using the following command:</p>
@@ -2065,7 +2058,7 @@ Now, please continue with the lab and the CI/CD pipeline should be working as ex
 </span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>-backend-config="address=https://198.18.133.101/api/v4/projects/${PROJECT_ID}/terraform/state/nac-catalystcenter-comprehensive-example" `
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>-backend-config="lock_address=https://198.18.133.101/api/v4/projects/${PROJECT_ID}/terraform/state/nac-catalystcenter-comprehensive-example/lock" `
 </span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>-backend-config="unlock_address=https://198.18.133.101/api/v4/projects/${PROJECT_ID}/terraform/state/nac-catalystcenter-comprehensive-example/lock" `
-</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>-backend-config="username=root" -backend-config="password=glpat-zGWadcrQ52yo8HVMP3eN" `
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>-backend-config="username=root" -backend-config="password=glpat-NspBrnxYxNzAJ_P9UnDv" `
 </span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>-backend-config=lock_method=POST -backend-config="unlock_method=DELETE" -backend-config="retry_wait_min=5"
 </span></code></pre></div>
 <p>Run the migration command that will move your Terraform state from local to GitLab HTTP remote backend:</p>
@@ -2073,7 +2066,7 @@ Now, please continue with the lab and the CI/CD pipeline should be working as ex
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>-backend-config="address=https://198.18.133.101/api/v4/projects/19/terraform/state/nac-catalystcenter-comprehensive-example" `
 </span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>-backend-config="lock_address=https://198.18.133.101/api/v4/projects/19/terraform/state/nac-catalystcenter-comprehensive-example/lock" `
 </span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>-backend-config="unlock_address=https://198.18.133.101/api/v4/projects/19/terraform/state/nac-catalystcenter-comprehensive-example/lock" `
-</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>-backend-config="username=root" -backend-config="password=glpat-zGWadcrQ52yo8HVMP3eN" `
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>-backend-config="username=root" -backend-config="password=glpat-NspBrnxYxNzAJ_P9UnDv" `
 </span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>-backend-config=lock_method=POST -backend-config="unlock_method=DELETE" -backend-config="retry_wait_min=5"
 </span></code></pre></div>
 <div class="admonition note">
