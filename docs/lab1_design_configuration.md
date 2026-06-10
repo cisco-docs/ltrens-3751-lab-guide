@@ -8,46 +8,54 @@ The repository used in this lab can be found at: <https://github.com/netascode/n
 
 Using the previously established [RDP](rdp://198.18.133.20) session with the **Win10 VM**, start the '**Visual Studio Code**'  ![](./assets/vcs.png){ width=40 } application.
 
-When you first open VS Code, you should see the Welcome page with different actions to get started.
-
-Open a new terminal by selecting `Terminal -> New Terminal` from the menu.
+When you first open VS Code, you should see the Welcome page with different actions to get started. Also, you will be in something called a "Workspace". As shown in the screenshot below, you will be in the `SDA_AS_CODE` workspace. This has been created so that you can conduct all of your labs in a single instance of VS Code and don't have to keep switching between different windows. 
 
 <figure markdown>
-  ![](./assets/vs_terminal.png){ width="500" }
+  ![](./assets/vs_workspace.png){ width="500" }
+</figure>
+
+Right-click on the open space below `sda_as_code.code-workspace` and open new integrated terminal. It should look like the screenshot below.
+
+<figure markdown>
+  ![](./assets/vs_integrated_terminal.png){ width="500" }
+</figure>
+ 
+You will see a new terminal console open in the bottom of the screen. It should look like the screenshot below.
+
+<figure markdown>
+  ![](./assets/vs_terminal_console.png){ width="500" }
 </figure>
 
 In the terminal window type the following command to clone the repository:
 
 ```bash
 git clone https://github.com/netascode/nac-catalystcenter-simple-example.git
+cd nac-catalystcenter-simple-example
 ```
 
 Press **Enter** to create your local clone.
 
 ```cli
-PS C:\Users\admin\Desktop> git clone https://github.com/netascode/nac-catalystcenter-simple-example.git
+PS C:\Users\admin\Documents\sda_as_code> git clone https://github.com/netascode/nac-catalystcenter-simple-example.git
 Cloning into 'nac-catalystcenter-simple-example'...
-remote: Enumerating objects: 37, done.
-remote: Counting objects: 100% (37/37), done.
-remote: Compressing objects: 100% (28/28), done.
-remote: Total 37 (delta 13), reused 32 (delta 8), pack-reused 0 (from 0)
-Receiving objects: 100% (37/37), 7.65 KiB | 711.00 KiB/s, done.
-Resolving deltas: 100% (13/13), done.
+remote: Enumerating objects: 80, done.
+remote: Counting objects: 100% (80/80), done.
+remote: Compressing objects: 100% (57/57), done.
+remote: Total 80 (delta 39), reused 61 (delta 22), pack-reused 0 (from 0)
+Receiving objects: 100% (80/80), 12.91 KiB | 357.00 KiB/s, done.
+Resolving deltas: 100% (39/39), done.
+PS C:\Users\admin\Documents\sda_as_code> 
 ```
 
 Then open the newly created folder in "Visual Studio Code". It will ask you for the location on the upper bar - type in `/home/cisco/nac-catalystcenter-simple-example`
 
 <figure markdown>
-  ![](./assets/vs_terminal2.png){ width="400" }
+  ![](./assets/vs_nac_cat_c_simple.png){ width="400" }
 </figure>
 
-On the Workspace Trust dialog, select **Yes, I trust the authors** to enable all features in the workspace.
+If prompted, on the Workspace Trust dialog, select **Yes, I trust the authors** to enable all features in the workspace.
 
-<figure markdown>
-  ![](./assets/vs_terminal3.png){ width="400" }
-</figure>
-
-The working area should look like this:
+The working area should look like the screenshot below:
 
 <figure markdown>
   ![](./assets/nac-cc-simple-example-fig1.png){ width="700" }
@@ -347,20 +355,9 @@ The next step is to **Initialize Terraform**. This process, executed with the `t
 
 To initialize Terraform, first, open a terminal.
 
-In the Explorer, you can right-click and select **Open in Integrated Terminal**  to open a new terminal from a folder.
+In the Explorer, you can right-click and select **Open in Integrated Terminal**  to open a new terminal from a folder if not already open.
 
-<figure markdown>
-  ![](./assets/vs_terminal5.png){ width="450" }
-</figure>
-
-A new PowerShell terminal should open:
-
-<figure markdown>
-  ![](./assets/powershell.png){ width="550" }
-</figure>
-
-
-Once the terminal is open, run the following command to initialize Terraform:
+Run the following command to initialize Terraform, ensure you are in the correct directory and the terminal is open to the correct folder.
 
 ```cli
 terraform init

@@ -17,7 +17,12 @@ Master Pipeline
   ![](./assets/nac-cc-cicd-example-fig7.png){ width="800" }
 </figure>
 
-Start "Visual Studio Code" and open a new terminal by selecting `Terminal -> New Terminal` from the menu.
+Go back to the SDA_AS_CODE workspace in "Visual Studio Code" and open a new terminal and go back to `sda_as_code` directory by typing following command:
+
+```cli
+cd ..
+PS C:\Users\admin\Documents\sda_as_code> 
+```
 
 In the terminal window type the following command to clone the repository to your local machine:
 

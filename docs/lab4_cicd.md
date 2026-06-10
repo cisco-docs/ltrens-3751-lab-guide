@@ -82,10 +82,10 @@ In your newly created GitLab repository, click the `Code` button, then copy the 
   ![](./assets/nac-ise-cicd-example-fig4.png){ width="800" }
 </figure>
 
-Start "Visual Studio Code" and open a new terminal by selecting `Terminal -> New Terminal` from the menu.
+Back in "Visual Studio Code", go to terminal 
 
 !!! note
-    Make sure you are not in the existing git repository, otherwise you will get an error. Use `cd ..` to go up one level.
+    Make sure you are not in the existing git repository, otherwise you will get an error. Use `cd ..` to go up one level. You should be at `PS C:\Users\admin\Documents\sda_as_code>` prompt.
 
 In the terminal window type the following command to clone the repository:
 
@@ -94,10 +94,10 @@ git -c http.sslVerify=false clone https://198.18.133.101/sda_as_code/nac-ise-com
 ```
 
 !!! note
-    You might be prompted for username and password (root/C1sco12345)
+    You might be prompted for username and password (root/C1sco12345) on top of the search bar.
 
 ```
-PS C:\Users\admin\Desktop> git -c http.sslVerify=false clone https://198.18.133.101/sda_as_code/nac-ise-comprehensive-example.git
+PS C:\Users\admin\Documents\sda_as_code> git -c http.sslVerify=false clone https://198.18.133.101/sda_as_code/nac-ise-comprehensive-example.git
 Cloning into 'nac-ise-comprehensive-example'...
 remote: Enumerating objects: 23, done.
 remote: Total 23 (delta 0), reused 0 (delta 0), pack-reused 23 (from 1)
@@ -105,17 +105,7 @@ Receiving objects: 100% (23/23), 4.07 KiB | 297.00 KiB/s, done.
 Resolving deltas: 100% (9/9), done.
 ```
 
-Then open the newly created folder in "Visual Studio Code".
-
-<figure markdown>
-  ![](./assets/vs_terminal2.png){ width="400" }
-</figure>
-
-On the Workspace Trust dialog, select **Yes, I trust the authors** to enable all features in the workspace.
-
-<figure markdown>
-  ![](./assets/vs_terminal3.png){ width="400" }
-</figure>
+Then expand the newly created folder in the explorer `nac-ise-comprehensive-example` icon.
 
 !!! note
     Note that `git` command was executed with option `-c http.sslVerify=false` which is used to disable SSL certificate verification when making HTTPS requests. This means that Git will not check the validity Gitlab self-signed SSL certificate. You can enable the option globally for all future Git operations by using the following command:
@@ -721,7 +711,7 @@ terraform init -migrate-state `
 -backend-config="address=https://198.18.133.101/api/v4/projects/${PROJECT_ID}/terraform/state/nac-catalystcenter-comprehensive-example" `
 -backend-config="lock_address=https://198.18.133.101/api/v4/projects/${PROJECT_ID}/terraform/state/nac-catalystcenter-comprehensive-example/lock" `
 -backend-config="unlock_address=https://198.18.133.101/api/v4/projects/${PROJECT_ID}/terraform/state/nac-catalystcenter-comprehensive-example/lock" `
--backend-config="username=root" -backend-config="password=glpat-zGWadcrQ52yo8HVMP3eN" `
+-backend-config="username=root" -backend-config="password=glpat-NspBrnxYxNzAJ_P9UnDv" `
 -backend-config=lock_method=POST -backend-config="unlock_method=DELETE" -backend-config="retry_wait_min=5"
 ```
 
@@ -732,7 +722,7 @@ terraform init -migrate-state `
 -backend-config="address=https://198.18.133.101/api/v4/projects/19/terraform/state/nac-catalystcenter-comprehensive-example" `
 -backend-config="lock_address=https://198.18.133.101/api/v4/projects/19/terraform/state/nac-catalystcenter-comprehensive-example/lock" `
 -backend-config="unlock_address=https://198.18.133.101/api/v4/projects/19/terraform/state/nac-catalystcenter-comprehensive-example/lock" `
--backend-config="username=root" -backend-config="password=glpat-zGWadcrQ52yo8HVMP3eN" `
+-backend-config="username=root" -backend-config="password=glpat-NspBrnxYxNzAJ_P9UnDv" `
 -backend-config=lock_method=POST -backend-config="unlock_method=DELETE" -backend-config="retry_wait_min=5"
 ```
 

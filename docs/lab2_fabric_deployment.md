@@ -19,44 +19,42 @@ Catalyst Center as Code for Catalyst Center can be used to instantiate SDA fabri
 
 ## Getting started
 
-In "Visual Studio Code" go to `File -> New Window`, this will open a new Visual Studio Code window.
+In "Visual Studio Code Terminal", go back to the `sda_as_code` workspace by typing following command:
 
-<figure markdown>
-  ![](./assets/vs_newwindow.png){ width="400" }
-</figure>
+```bash
+cd ..
+```
 
-Open a new terminal by selecting `Terminal -> New Terminal` from the menu.
+You would be back int he SDA_AS_CODE workspace.
 
-<figure markdown>
-  ![](./assets/vs_terminal.png){ width="500" }
-</figure>
+```cli
+PS C:\Users\admin\Documents\sda_as_code\nac-catalystcenter-simple-example> cd ..
+PS C:\Users\admin\Documents\sda_as_code> 
+```
 
 In the terminal window type the following command to clone the repository:
 
 ```bash
 git clone https://github.com/netascode/nac-catalystcenter-comprehensive-example.git
+cd nac-catalystcenter-comprehensive-example
 ```
 
-Press **Enter** to create your local clone.
+Press **Enter** to create your local clone and change to the newly created folder.
 
 ```cli
-PS C:\Users\admin\Desktop> git clone https://github.com/netascode/nac-catalystcenter-comprehensive-example.git
+PS C:\Users\admin\Documents\sda_as_code> git clone https://github.com/netascode/nac-catalystcenter-comprehensive-example.git
 Cloning into 'nac-catalystcenter-comprehensive-example'...
-remote: Enumerating objects: 74, done.
-remote: Counting objects: 100% (74/74), done.
-remote: Compressing objects: 100% (49/49), done.
-remote: Total 74 (delta 38), reused 55 (delta 21), pack-reused 0 (from 0)
-Receiving objects: 100% (74/74), 11.90 KiB | 2.38 MiB/s, done.
-Resolving deltas: 100% (38/38), done.
+remote: Enumerating objects: 147, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 147 (delta 17), reused 14 (delta 14), pack-reused 123 (from 1)
+Receiving objects: 100% (147/147), 21.13 KiB | 248.00 KiB/s, done.
+Resolving deltas: 100% (84/84), done.
+PS C:\Users\admin\Documents\sda_as_code> cd nac-catalystcenter-comprehensive-example
+PS C:\Users\admin\Documents\sda_as_code\nac-catalystcenter-comprehensive-example> 
 ```
 
-Then open the newly created folder in "Visual Studio Code".
-
-<figure markdown>
-  ![](./assets/vs_terminal2.png){ width="400" }
-</figure>
-
-On the Workspace Trust dialog, select **Yes, I trust the authors** to enable all features in the workspace.
+Then expand the newly created folder `nac-catalystcenter-comprehensive-example` icon in the explorer. 
 
 ## Step 1: Update configuration
 
@@ -114,20 +112,9 @@ module "catalyst_center" {
 }
 ```
 
-In the Explorer, right-click and select **Open in Integrated Terminal**  to open a new terminal from a folder.
+Open the integrated terminal, if not already open, in the Explorer, right-click and select **Open in Integrated Terminal**  to open a new terminal from a folder.
 
-<figure markdown>
-  ![](./assets/vs_terminal5_1.png){ width="450" }
-</figure>
-
-A new PowerShell terminal should open:
-
-<figure markdown>
-  ![](./assets/powershell2.png){ width="700" }
-</figure>
-
-
-Once the terminal is open, run the following command to initialize Terraform:
+Run the following command to initialize Terraform, ensure you are in the correct directory and the terminal is open to the correct folder.
 
 ```cli
 terraform init

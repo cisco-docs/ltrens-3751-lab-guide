@@ -6,47 +6,45 @@ The repository used in this lab can be found at: <https://github.com/netascode/n
 
 ## Getting started
 
-In "Visual Studio Code" go to `File -> New Window`, this will open a new Visual Studio Code window.
+In "Visual Studio Code Terminal", go back to the `sda_as_code` workspace by typing following command:
 
-<figure markdown>
-  ![](./assets/vs_newwindow.png){ width="400" }
-</figure>
+```bash
+cd ..
+```
 
-Open a new terminal by selecting `Terminal -> New Terminal` from the menu.
+You would be back int he SDA_AS_CODE workspace.
 
-<figure markdown>
-  ![](./assets/vs_terminal.png){ width="500" }
-</figure>
+```cli
+PS C:\Users\admin\Documents\sda_as_code\nac-catalystcenter-comprehensive-example> cd ..
+PS C:\Users\admin\Documents\sda_as_code> 
+```
 
 In the terminal window type the following command to clone the repository:
 
 ```bash
 git clone https://github.com/netascode/nac-ise-simple-example.git
+cd nac-ise-simple-example
 ```
 
-Press **Enter** to create your local clone.
+Press **Enter** to create your local clone and change to the newly created folder.
 
 ```cli
-PS C:\Users\admin\Desktop> git clone https://github.com/netascode/nac-ise-simple-example.git
+PS C:\Users\admin\Documents\sda_as_code> git clone https://github.com/netascode/nac-ise-simple-example.git
+>> cd nac-ise-simple-example
 Cloning into 'nac-ise-simple-example'...
-remote: Enumerating objects: 40, done.
-remote: Counting objects: 100% (40/40), done.
-remote: Compressing objects: 100% (32/32), done.
-remote: Total 40 (delta 5), reused 40 (delta 5), pack-reused 0 (from 0)
-Receiving objects: 100% (40/40), 49.11 KiB | 1.09 MiB/s, done.
-Resolving deltas: 100% (5/5), done.
+remote: Enumerating objects: 46, done.
+remote: Counting objects: 100% (46/46), done.
+remote: Compressing objects: 100% (37/37), done.
+remote: Total 46 (delta 12), reused 36 (delta 6), pack-reused 0 (from 0)
+Receiving objects: 100% (46/46), 58.98 KiB | 3.28 MiB/s, done.
+Resolving deltas: 100% (12/12), done.
+PS C:\Users\admin\Documents\sda_as_code\nac-ise-simple-example> 
 ```
 
-Then open the newly created folder in "Visual Studio Code".
+Then expand the newly created folder `nac-ise-simple-example` icon in the explorer. 
 
 <figure markdown>
-  ![](./assets/vs_terminal2.png){ width="400" }
-</figure>
-
-On the Workspace Trust dialog, select **Yes, I trust the authors** to enable all features in the workspace.
-
-<figure markdown>
-  ![](./assets/vs_terminal3.png){ width="400" }
+  ![](./assets/vs_nac_ise_simple.png){ width="400" }
 </figure>
 
 The working area should look like this:
